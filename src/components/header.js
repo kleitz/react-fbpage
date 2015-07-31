@@ -21,7 +21,7 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-    source: React.PropTypes.string.isRequired,
+    source: React.PropTypes.string,
     offsetX: React.PropTypes.number,
     offsetY: React.PropTypes.number
 };

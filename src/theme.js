@@ -132,10 +132,10 @@ export default {
     feed: {
         base: {
             background: '#f6f7f8',
-            border: '1px solid #e9eaed',
-            padding: '8px'
+            border: '1px solid #e9eaed'
         },
         scroller: {
+            padding: '8px',
             overflow: 'auto',
             height: '500px'
         },
@@ -148,7 +148,7 @@ export default {
                 padding: '12px',
                 position: 'relative',
                 wordWrap: 'break-word',
-                marginTop: '10px'
+                marginBottom: '10px'
             },
             header: {
                 base: {
@@ -207,6 +207,11 @@ export default {
                 }
             },
             photo: {
+                image: {
+                    width: '100%'
+                }
+            },
+            link: {
                 image: {
                     width: '100%'
                 }

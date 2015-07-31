@@ -26,11 +26,7 @@ class Loader extends React.Component {
     render(){
         const loading = this.props.loading;
         const loader = <div ref='spinner' style={this.props.style}/>;
-        return (
-            <div>
-                {loading ? loader : ''}
-            </div>
-        );
+        return (<div>{loading ? loader : ''}</div>);
     }
 }
 

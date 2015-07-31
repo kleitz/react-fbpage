@@ -8,7 +8,7 @@ const FEED_FIELDS = [
     'message',
     'full_picture',
     'link',
-    'updated_time',
+    'created_time',
     'from',
     'shares',
     'source',

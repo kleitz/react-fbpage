@@ -6,6 +6,8 @@ import moment from 'moment';
 import numeral from 'numeral';
 import _ from 'lodash';
 
+import InfiniteScroll from './infscroll';
+
 @Radium
 class Header extends React.Component {
     dateTime(){
@@ -46,12 +48,17 @@ class Statistics extends React.Component {
         let value = numeral(prop).format('0,0');
         return `${value} ${unit}`;
     }
+    renderShares(){
+        return (
+            <a href={this.props.link} style={this.props.style}>
+                <p>{this.format(this.props.shares.count, 'Shares')}</p>
+            </a>
+        );
+    }
     render(){
         return (
             <div>
-                <a href={this.props.link} style={this.props.style}>
-                    <p>{this.format(this.props.shares, 'Shares')}</p>
-                </a>
+                {this.props.shares ? this.renderShares() : ''}
             </div>
         );
     }
@@ -94,9 +101,35 @@ class FeedPhoto extends React.Component {
     }
 }
 
+class FeedStatus extends React.Component {
+    render(){
+        return (
+            <div>
+                <p>{this.props.message}</p>
+            </div>
+        );
+    }
+}
+
+class FeedLink extends React.Component {
+    render(){
+        const style = this.props.style;
+        return (
+            <div>
+                <p>{this.props.message}</p>
+                <a href={this.props.link}>
+                    <img src={this.props.full_picture} style={style.image}/>
+                </a>
+            </div>
+        );
+    }
+}
+
 const Registry = {
     video: FeedVideo,
-    photo: FeedPhoto
+    photo: FeedPhoto,
+    status: FeedStatus,
+    link: FeedLink
 };
 
 class Item extends React.Component {
@@ -117,7 +150,7 @@ class Item extends React.Component {
                     id={props.from.id}
                     name={props.from.name}
                     profile={props.from.profile}
-                    datetime={props.updated_time}
+                    datetime={props.created_time}
                     link={props.link}
                     style={style.header}
                 />
@@ -126,7 +159,7 @@ class Item extends React.Component {
                 </div>
                 <Statistics
                     link={props.link}
-                    shares={props.shares.count}
+                    shares={props.shares}
                     style={style.statistics}
                 />
                 <Actions
@@ -147,53 +180,6 @@ class Loading extends React.Component {
         );
     }
 }
-
-class InfiniteScroll extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { isLoading: false };
-        this._scrollHandler = () => this.onScroll();
-    }
-    componentDidMount(){
-        window.addEventListener('resize', this._scrollHandler);
-    }
-    componentWillUnmount(){
-        window.removeEventListener('resize', this._scrollHandler);
-    }
-    onScroll(){
-        let props = this.props;
-        if(!props.canGetNext || this.state.isLoading){ return; }
-        let el = React.findDOMNode(this);
-        let offset = el.scrollTop + el.offsetHeight;
-        if(offset + props.threshold < el.scrollHeight){ return; }
-        console.log('get some more!');
-        this.setState({isLoading: true});
-        props.getNext();
-    }
-    renderLoading(){
-        return this.state.isLoading ? this.props.loadingEl : '';
-    }
-    render(){
-        return (
-            <div style={this.props.style} onScroll={this._scrollHandler}>
-                {this.props.children}
-                {this.renderLoading()}
-            </div>
-        );
-    }
-}
-
-InfiniteScroll.propTypes = {
-    canGetNext: React.PropTypes.bool.isRequired,
-    getNext: React.PropTypes.func.isRequired,
-    threshold: React.PropTypes.number,
-    loadingEl: React.PropTypes.element,
-    style: React.PropTypes.object
-};
-
-InfiniteScroll.defaultProps = {
-    threshold: 1000
-};
 
 class Feed extends React.Component {
     loadNext(){
