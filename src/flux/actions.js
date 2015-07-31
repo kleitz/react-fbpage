@@ -3,8 +3,8 @@
 import alt from './alt';
 
 class PageActions {
-    load(){
-        return {};
+    load(page){
+        return { page: page };
     }
 }
 

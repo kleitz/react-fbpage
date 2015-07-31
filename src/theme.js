@@ -208,4 +208,3 @@ export default {
         }
     }
 };
-//if height is not larger than this cover height. position.

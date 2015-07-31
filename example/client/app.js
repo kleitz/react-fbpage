@@ -8,6 +8,8 @@ import fbStore from '../../src/flux/stores';
 import fbActions from '../../src/flux/actions';
 import theme from '../../src/theme';
 
+theme.base.width = '50%';
+
 @ConnectToStores
 class FbPageController extends React.Component {
     static getStores(){
@@ -16,8 +18,8 @@ class FbPageController extends React.Component {
     static getPropsFromStores(){
         return fbStore.getState();
     }
-    componentWillMount(){
-        fbActions.load();
+    static componentDidConnect(){
+        fbActions.load('facebook');
     }
     render(){
         const props = this.props;

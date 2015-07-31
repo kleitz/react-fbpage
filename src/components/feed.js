@@ -15,13 +15,17 @@ class Header extends React.Component {
         let format = `MMMM DD ${year} [at] h:mma`;
         return dt.format(format);
     }
+    avatar(){
+        let id = this.props.id;
+        return `https://graph.facebook.com/${id}/picture`;
+    }
     render(){
         const style = this.props.style;
         const link = this.props.link;
         return (
             <div style={style.base}>
                 <a href={link} style={style.iconLink}>
-                    <img src={this.props.profile} style={style.iconImg}/>
+                    <img src={this.avatar()} style={style.iconImg}/>
                 </a>
                 <div style={style.details}>
                     <a key='name' href={link} style={style.name}>
@@ -110,6 +114,7 @@ class Item extends React.Component {
         return (
             <div style={style.base}>
                 <Header
+                    id={props.from.id}
                     name={props.from.name}
                     profile={props.from.profile}
                     datetime={props.updated_time}

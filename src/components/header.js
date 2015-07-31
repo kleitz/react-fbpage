@@ -7,11 +7,9 @@ import Radium from 'radium';
 class Header extends React.Component {
     render(){
         const style = this.props.style;
-        const xOffset = this.props.offset_x || 0;
-        const yOffset = this.props.offset_y || 0;
         const img = [style.image, {
-            left: xOffset * -1 + 'px',
-            top: yOffset * -1 + 'px'
+            left: this.props.offsetX * -1 + 'px',
+            top: this.props.offsetY * -1 + 'px'
         }];
         return (
             <div style={style.base}>
@@ -21,5 +19,16 @@ class Header extends React.Component {
         );
     }
 }
+
+Header.propTypes = {
+    source: React.PropTypes.string.isRequired,
+    offsetX: React.PropTypes.number,
+    offsetY: React.PropTypes.number
+};
+
+Header.defaultProps = {
+    offsetX: 0,
+    offsetY: 0
+};
 
 export default Header;
