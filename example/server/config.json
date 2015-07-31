@@ -1,0 +1,15 @@
+{
+    "dev": {
+        "api": {
+            "prefix": "/api/v1"
+        }
+    },
+    "facebook": {
+        "api": {
+            "url": "https://graph.facebook.com/"
+        },
+        "env": {
+            "token": "REACT_PAGE_FB_TOKEN"
+        }
+    }
+}

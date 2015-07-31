@@ -4,7 +4,11 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-    entry: [ './example/app.js' ],
+    entry: [
+        'webpack-dev-server/client?http://0.0.0.0:8080',
+        'webpack/hot/only-dev-server',
+        './example/client/app.js'
+    ],
     output: {
         path: __dirname,
         filename: 'main.js',
@@ -29,7 +33,7 @@ module.exports = {
         loaders: [{
             test: /\.js$/,
             exclude: [/node_modules/],
-            loader: 'babel-loader'
+            loaders: ['react-hot', 'babel-loader?stage=0']
         }]
     },
     plugins: [

@@ -4,7 +4,9 @@
   "description": "React Facebook Page Component",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test",
+    "coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test",
+    "test-travis": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- --compilers js:babel/register -r ./test/support/env -R spec --recursive ./test"
   },
   "repository": {
     "type": "git",
@@ -35,9 +37,21 @@
     "gulp-open": "^1.0.0",
     "gulp-util": "^3.0.6",
     "gulp-webpack": "^1.5.0",
+    "http-proxy": "^1.11.1",
+    "nconf": "^0.7.1",
     "node-libs-browser": "^0.5.2",
-    "react": "^0.13.3",
+    "react-hot-loader": "^1.2.8",
     "webpack": "^1.10.1",
     "webpack-dev-server": "^1.10.1"
+  },
+  "dependencies": {
+    "alt": "^0.17.1",
+    "axios": "^0.5.4",
+    "immutable": "^3.7.4",
+    "lodash": "^3.10.0",
+    "moment": "^2.10.3",
+    "numeral": "^1.5.3",
+    "radium": "^0.13.4",
+    "react": "^0.13.3"
   }
 }
