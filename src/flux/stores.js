@@ -27,7 +27,6 @@ class PageStore {
         });
     }
     _parse(response){
-        console.log(response);
         if(!response){ return {}; }
         const avatarUrl = response.picture.data.url;
         const cover = response.cover;

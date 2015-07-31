@@ -39,10 +39,16 @@ export default {
     base: {
         fontFamily: 'lucida grande ,tahoma,verdana,arial,sans-serif',
         fontSize: '11px',
-        color: '#141823'
+        color: '#141823',
+        position: 'relative'
     },
     loader: {
-        backgroundColor: 'red'
+        backgroundColor: 'white',
+        opacity: 0.75,
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 10
     },
     header: {
         base: {
