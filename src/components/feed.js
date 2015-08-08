@@ -1,9 +1,10 @@
 'use strict';
 
-import React from 'react';
+import React from 'react/addons';
 import Radium from 'radium';
 import moment from 'moment';
 import numeral from 'numeral';
+import {Map} from 'immutable';
 import _ from 'lodash';
 
 import InfiniteScroll from './infscroll';
@@ -186,7 +187,8 @@ class Feed extends React.Component {
         console.log('load next');
     }
     render(){
-        const feed = this.props.data;
+        const feed = this.props.feed;
+        const data = feed.get('data');
         const style = this.props.style;
         return (
             <div style={style.base}>
@@ -195,11 +197,16 @@ class Feed extends React.Component {
                     getNext={this.loadNext}
                     canGetNext={true}
                     style={style.scroller}>
-                    {feed.map((i) => <Item key={i.id} style={style.item} {...i}/>)}
+                    {data.map((i) => <Item key={i.id} style={style.item} {...i}/>)}
                 </InfiniteScroll>
             </div>
         );
     }
 }
+
+Feed.propTypes = {
+    style: React.PropTypes.object,
+    feed: React.PropTypes.instanceOf(Map).isRequired
+};
 
 export default Feed;

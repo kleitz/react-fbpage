@@ -12,7 +12,7 @@
     "globals": {
     },
     "rules": {
-        "new-cap": 1,
+        "new-cap": 0,
         "quotes": [2, "single"],
         "eol-last": [0],
         "no-mixed-requires": [0],

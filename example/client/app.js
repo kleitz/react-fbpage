@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import ConnectToStores from 'alt/utils/connectToStores';
+import AltComponent from '../../src/flux/alt-component';
 
 import FbPage from '../../src/components/page';
 import fbStore from '../../src/flux/stores';
@@ -10,27 +10,27 @@ import theme from '../../src/theme';
 
 theme.base.width = '50%';
 
-@ConnectToStores
-class FbPageController extends React.Component {
-    static getStores(){
+class FbPageController extends AltComponent {
+    getStores(){
         return [fbStore];
     }
-    static getPropsFromStores(){
-        return fbStore.getState();
+    getPropsFromStores(){
+        return { store: fbStore.getState() };
     }
-    static componentDidConnect(){
-        fbActions.load('facebook');
+    componentDidMount(){
+        super.componentDidMount();
+        fbActions.load('reeflaughingdog');
     }
     render(){
-        const props = this.props;
+        const store = this.state.store;
         return (
             <FbPage
                 theme={theme}
-                loading={props.loading}
-                header={props.header}
-                profile={props.profile}
-                feed={props.feed}
-                actions={props.actions}
+                loading={store.get('loading')}
+                header={store.get('header')}
+                profile={store.get('profile')}
+                feed={store.get('feed')}
+                actions={store.get('actions')}
             />
         );
     }

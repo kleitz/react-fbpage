@@ -31,7 +31,9 @@ class Loader extends React.Component {
 }
 
 Loader.propTypes = {
-    config: React.PropTypes.object
+    style: React.PropTypes.object,
+    config: React.PropTypes.object,
+    loading: React.PropTypes.bool.isRequired
 };
 
 Loader.defaultProps = {

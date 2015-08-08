@@ -1,13 +1,18 @@
 'use strict';
 
-import React from 'react';
+import React from 'react/addons';
+import {Map} from 'immutable';
 
-class FbPage extends React.Component {
+class Actions extends React.Component {
+    shouldComponentUpdate(){
+        return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+    }
     render(){
         const style = this.props.style;
+        const actions = this.props.actions;
         return (
             <div style={style.base}>
-                <a href={this.props.link} style={style.button}>
+                <a href={actions.get('link')} style={style.button}>
                     Like Page
                 </a>
             </div>
@@ -15,4 +20,9 @@ class FbPage extends React.Component {
     }
 }
 
-export default FbPage;
+Actions.propTypes = {
+    style: React.PropTypes.object,
+    actions: React.PropTypes.instanceOf(Map).isRequired
+};
+
+export default Actions;
