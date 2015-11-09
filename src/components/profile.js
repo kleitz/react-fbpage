@@ -7,13 +7,8 @@ import {Map} from 'immutable';
 
 @Radium
 class Profile extends React.Component {
-    // shouldComponentUpdate(){
-    //     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-    // }
-    renderLikes(){
-        const profile = this.props.profile;
-        let likes = numeral(profile.get('likes')).format('0,0');
-        return `${likes} likes`;
+    constructor(props){
+        super(props);
     }
     render(){
         const style = this.props.style;
@@ -36,6 +31,11 @@ class Profile extends React.Component {
                 </div>
             </div>
         );
+    }
+    renderLikes(){
+        const profile = this.props.profile;
+        let likes = numeral(profile.get('likes')).format('0,0');
+        return `${likes} likes`;
     }
 }
 

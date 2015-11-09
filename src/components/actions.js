@@ -4,6 +4,9 @@ import React from 'react';
 import {Map} from 'immutable';
 
 class Actions extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render(){
         const style = this.props.style;
         const actions = this.props.actions;

@@ -4,44 +4,50 @@ import React from 'react';
 import {Map} from 'immutable';
 
 import Loader from './loader';
-import Header from './header';
+import Cover from './cover';
 import Profile from './profile';
 import Actions from './actions';
-import Feed from './feed';
+import FeedContainer from './feed/container';
+
+import defaultTheme from '../themes/default';
 
 class FbPage extends React.Component {
+    constructor(props){
+        super(props);
+    }
     render(){
         const props = this.props;
-        const theme = props.theme;
+        const style = props.style;
         return (
-            <div style={theme.base}>
-                <Loader loading={props.loading} style={theme.loader}/>
-                <Header header={props.header} style={theme.header}>
+            <div style={style.base}>
+                <Loader loading={props.loading} style={style.loader}/>
+                <Cover cover={props.cover} style={style.cover}>
                     <Profile
                         profile={props.profile}
-                        style={theme.header.profile}
+                        style={style.cover.profile}
                     />
                     <Actions
                         actions={props.actions}
-                        style={theme.header.actions}
+                        style={style.cover.actions}
                     />
-                </Header>
-                <Feed
-                    feed={props.feed}
-                    style={theme.feed}
-                />
+                </Cover>
+                <FeedContainer feed={props.feed} style={style.feed}/>
             </div>
         );
     }
 }
 
 FbPage.propTypes = {
-    theme: React.PropTypes.object,
+    style: React.PropTypes.object,
     loading: React.PropTypes.bool,
-    header: React.PropTypes.instanceOf(Map).isRequired,
+    cover: React.PropTypes.instanceOf(Map).isRequired,
     profile: React.PropTypes.instanceOf(Map).isRequired,
     actions: React.PropTypes.instanceOf(Map).isRequired,
     feed: React.PropTypes.instanceOf(Map).isRequired
+};
+
+FbPage.defaultProps = {
+    style: defaultTheme
 };
 
 export default FbPage;

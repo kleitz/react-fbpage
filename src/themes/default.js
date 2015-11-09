@@ -50,7 +50,7 @@ export default {
         height: '100%',
         zIndex: 10
     },
-    header: {
+    cover: {
         base: {
             position: 'relative',
             overflow: 'hidden',

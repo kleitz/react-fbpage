@@ -15,7 +15,7 @@ class PageStore {
         });
         this.state = immutable.Map({
             loading: false,
-            header: immutable.Map({
+            cover: immutable.Map({
                 offset: {x: 0, y: 0}
             }),
             profile: immutable.Map(),
@@ -54,7 +54,7 @@ class PageStore {
         const feedPaging = response.feed ? response.feed.paging : {};
         console.log(response);
         return {
-            header: immutable.Map({
+            cover: immutable.Map({
                 offset: {
                     x: cover.offset_x,
                     y: cover.offset_y

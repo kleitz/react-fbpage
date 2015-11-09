@@ -22,9 +22,9 @@ class FbPageApp extends AltComponent {
         const store = this.state.store;
         return (
             <FbPage
-                theme={theme}
+                style={theme}
                 loading={store.get('loading')}
-                header={store.get('header')}
+                cover={store.get('cover')}
                 profile={store.get('profile')}
                 feed={store.get('feed')}
                 actions={store.get('actions')}

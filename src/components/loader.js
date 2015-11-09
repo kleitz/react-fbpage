@@ -6,6 +6,9 @@ import Spinner from 'spin.js';
 
 @Radium
 class Loader extends React.Component {
+    constructor(props){
+        super(props);
+    }
     componentDidMount(){
         this.spinner = new Spinner(this.props.config);
         if(this.props.loading){ this.renderLoader(); }
@@ -25,7 +28,7 @@ class Loader extends React.Component {
     }
     render(){
         const loading = this.props.loading;
-        const loader = <div ref='spinner' style={this.props.style}/>;
+        const loader = <div ref="spinner" style={this.props.style}/>;
         return (<div>{loading ? loader : ''}</div>);
     }
 }
