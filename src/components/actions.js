@@ -1,12 +1,9 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 import {Map} from 'immutable';
 
 class Actions extends React.Component {
-    shouldComponentUpdate(){
-        return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-    }
     render(){
         const style = this.props.style;
         const actions = this.props.actions;

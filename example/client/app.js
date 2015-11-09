@@ -1,16 +1,13 @@
 'use strict';
 
 import React from 'react';
+import ReactDOM from 'react-dom';
 import AltComponent from '../../src/flux/alt-component';
-
-import FbPage from '../../src/components/page';
-import fbStore from '../../src/flux/stores';
-import fbActions from '../../src/flux/actions';
-import theme from '../../src/theme';
+import {FbPage, fbStore, fbActions, theme} from '../../src/index';
 
 theme.base.width = '50%';
 
-class FbPageController extends AltComponent {
+class FbPageApp extends AltComponent {
     getStores(){
         return [fbStore];
     }
@@ -19,7 +16,7 @@ class FbPageController extends AltComponent {
     }
     componentDidMount(){
         super.componentDidMount();
-        fbActions.load('reeflaughingdog');
+        fbActions.load('facebook');
     }
     render(){
         const store = this.state.store;
@@ -37,4 +34,4 @@ class FbPageController extends AltComponent {
 }
 
 const page = document.getElementById('page');
-React.render(<FbPageController/>, page);
+ReactDOM.render(<FbPageApp/>, page);

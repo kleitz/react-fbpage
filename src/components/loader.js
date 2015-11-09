@@ -20,7 +20,7 @@ class Loader extends React.Component {
         this.spinner.stop();
     }
     renderLoader(){
-        const node = React.findDOMNode(this.refs.spinner);
+        const node = this.refs.spinner;
         this.spinner.spin(node);
     }
     render(){
@@ -37,12 +37,13 @@ Loader.propTypes = {
 };
 
 Loader.defaultProps = {
+    loading: true,
     config: {
         lines: 13,
         length: 28,
         width: 14,
         radius: 42,
-        scale: 1,
+        scale: 0.25,
         corners: 1,
         color: '#000',
         opacity: 0.25,

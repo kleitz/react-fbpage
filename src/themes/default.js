@@ -135,9 +135,17 @@ export default {
             border: '1px solid #e9eaed'
         },
         scroller: {
-            padding: '8px',
-            overflow: 'auto',
-            height: '500px'
+            padding: '8px'
+            // overflow: 'auto',
+            // height: '500px'
+        },
+        loading: {
+            base: {
+                height: '100px'
+            },
+            spinner: {
+                position: 'relative'
+            }
         },
         item: {
             base: {

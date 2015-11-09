@@ -8,18 +8,16 @@ var open = require('gulp-open');
 var del = require('del');
 var url = require('url');
 var webpack = require('webpack');
-var gwebpack = require('gulp-webpack');
 var WebpackDevServer = require("webpack-dev-server");
 
 var DevServer = require('./example/server/app');
 
 var webpackConfig = {
-    dev: require('./webpack.config.js')
+    example: require('./example/webpack.config')
 };
 
 var DEV_HOST = 'localhost';
 var DEV_PORT = 3000;
-
 var WPACK_DEV_HOST = DEV_HOST;
 var WPACK_DEV_PORT = 8080;
 
@@ -33,12 +31,15 @@ var urlBuilder = function(host, port, path){
 };
 
 gulp.task('open', function(){
-    var url = urlBuilder(WPACK_DEV_HOST, WPACK_DEV_PORT, 'webpack-dev-server');
-    gulp.src('./example/client/index.html').pipe(open('',{ url: url }));
+    var path = 'webpack-dev-server/index.html';
+    var uri = urlBuilder(WPACK_DEV_HOST, WPACK_DEV_PORT, path);
+    gulp.src('').pipe(open({ uri: uri }));
 });
 
 gulp.task('clean', function(cb){
-    del(['lib'], cb)
+    del(['lib']).then(function(){
+        cb();
+    });
 });
 
 gulp.task('babel', ['clean'], function(){
@@ -53,7 +54,7 @@ gulp.task('webpack-dev-server', function(){
         console.log('Dev Server Listening On Port', DEV_PORT)
     });
     var proxy = urlBuilder(DEV_HOST, DEV_PORT);
-    new WebpackDevServer(webpack(webpackConfig.dev), {
+    new WebpackDevServer(webpack(webpackConfig.example), {
         publicPath: '/assets/',
         contentBase: 'example/client',
         hot: true,
@@ -65,9 +66,14 @@ gulp.task('webpack-dev-server', function(){
 });
 
 gulp.task('lint', function(){
-    return gulp.src(['src/**/*.js'])
+    return gulp.src(['src/**/*.js', 'test/**/*.js'])
         .pipe(eslint())
         .pipe(eslint.format())
+});
+
+gulp.task('watch', function() {
+    gulp.watch('src/**/*.js', ['lint']);
+    gulp.watch('test/**/*.js', ['lint']);
 });
 
 gulp.task('build', ['clean', 'babel']);

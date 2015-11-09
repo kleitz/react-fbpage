@@ -1,7 +1,6 @@
 'use strict';
 
 var webpack = require('webpack');
-var path = require('path');
 
 module.exports = {
     entry: [
@@ -25,15 +24,15 @@ module.exports = {
         extensions: ['', '.js', '.jsx']
     },
     module: {
-        preLoaders: [{
-            test: /\.js$/,
-            exclude: [/node_modules/,/dist/],
-            loader: 'eslint-loader'
-        }],
+        // preLoaders: [{
+        //     test: /\.js$/,
+        //     exclude: [/node_modules/],
+        //     loader: 'eslint-loader'
+        // }],
         loaders: [{
             test: /\.js$/,
             exclude: [/node_modules/],
-            loaders: ['react-hot', 'babel-loader?stage=0']
+            loaders: ['react-hot', 'babel-loader']
         }]
     },
     plugins: [

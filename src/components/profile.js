@@ -1,15 +1,15 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 import Radium from 'radium';
 import numeral from 'numeral';
 import {Map} from 'immutable';
 
 @Radium
 class Profile extends React.Component {
-    shouldComponentUpdate(){
-        return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-    }
+    // shouldComponentUpdate(){
+    //     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+    // }
     renderLikes(){
         const profile = this.props.profile;
         let likes = numeral(profile.get('likes')).format('0,0');

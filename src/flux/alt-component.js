@@ -1,6 +1,6 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 
 class AltStoreComponent extends React.Component {
     constructor(props){
@@ -22,9 +22,9 @@ class AltStoreComponent extends React.Component {
     onChange(){
         this.setState(this.getPropsFromStores(this.props, this.context));
     }
-    shouldComponentUpdate(){
-        return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-    }
+    // shouldComponentUpdate(){
+    //     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+    // }
 }
 
 export default AltStoreComponent;

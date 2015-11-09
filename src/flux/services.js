@@ -1,6 +1,8 @@
 'use strict';
 
-const axios = require('axios');
+import axios from 'axios';
+// import immutable from 'immutable';
+// import jsomap from './jsomap';
 
 const API_URL = '/api/v1/';
 
@@ -36,4 +38,18 @@ export default {
             }
         });
     }
+    // mapPageObject(page){
+    //     var test = jsomap(page, {
+    //         header: {
+    //             container: immutable.Map,
+    //             map: {
+    //                 offset: {
+    //                     x: 'cover.offset_x',
+    //                     y: 'cover.offset_y'
+    //                 }
+    //             }
+    //         }
+    //     });
+    //     return test;
+    // }
 };

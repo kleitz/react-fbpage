@@ -1,13 +1,15 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 import Radium from 'radium';
 import moment from 'moment';
 import numeral from 'numeral';
+import autolinker from 'autolinker';
 import {Map} from 'immutable';
 import _ from 'lodash';
 
-import InfiniteScroll from './infscroll';
+import InfiniteScroll from 'react-infscroll';
+import Loader from './loader';
 
 @Radium
 class Header extends React.Component {
@@ -28,7 +30,10 @@ class Header extends React.Component {
         return (
             <div style={style.base}>
                 <a href={link} style={style.iconLink}>
-                    <img src={this.avatar()} style={style.iconImg}/>
+                    <img
+                        src={this.avatar()}
+                        style={style.iconImg}
+                    />
                 </a>
                 <div style={style.details}>
                     <a key='name' href={link} style={style.name}>
@@ -57,11 +62,8 @@ class Statistics extends React.Component {
         );
     }
     render(){
-        return (
-            <div>
-                {this.props.shares ? this.renderShares() : ''}
-            </div>
-        );
+        const shares = this.props.shares ? this.renderShares() : '';
+        return (<div>{shares}</div>);
     }
 }
 
@@ -70,8 +72,7 @@ class Actions extends React.Component {
     render(){
         const style = this.props.style;
         return (
-            <div style={style.base}>
-            </div>
+            <div style={style.base}/>
         );
     }
 }
@@ -81,10 +82,11 @@ class FeedVideo extends React.Component {
         const style = this.props.style;
         return (
             <div>
-                <p>{this.props.message}</p>
-                <video src={this.props.source} style={style.player} controls>
-                    Your browser does not support the video tag.
-                </video>
+                <video
+                    src={this.props.source}
+                    style={style.player}
+                    controls
+                />
             </div>
         );
     }
@@ -95,8 +97,10 @@ class FeedPhoto extends React.Component {
         const style = this.props.style;
         return (
             <div>
-                <p>{this.props.message}</p>
-                <img src={this.props.full_picture} style={style.image}/>
+                <img
+                    src={this.props.full_picture}
+                    style={style.image}
+                />
             </div>
         );
     }
@@ -105,9 +109,7 @@ class FeedPhoto extends React.Component {
 class FeedStatus extends React.Component {
     render(){
         return (
-            <div>
-                <p>{this.props.message}</p>
-            </div>
+            <div/>
         );
     }
 }
@@ -117,9 +119,11 @@ class FeedLink extends React.Component {
         const style = this.props.style;
         return (
             <div>
-                <p>{this.props.message}</p>
                 <a href={this.props.link}>
-                    <img src={this.props.full_picture} style={style.image}/>
+                    <img
+                        src={this.props.full_picture}
+                        style={style.image}
+                    />
                 </a>
             </div>
         );
@@ -134,6 +138,11 @@ const Registry = {
 };
 
 class Item extends React.Component {
+    getMessage(){
+        const message = this.props.message;
+        const options = { hashtag: 'facebook' };
+        return { __html: autolinker.link(message, options) };
+    }
     renderContent(){
         const t = this.props.type;
         const type = Registry[t];
@@ -156,6 +165,7 @@ class Item extends React.Component {
                     style={style.header}
                 />
                 <div style={style.content}>
+                    <p dangerouslySetInnerHTML={this.getMessage()}/>
                     {this.renderContent()}
                 </div>
                 <Statistics
@@ -174,10 +184,12 @@ class Item extends React.Component {
 
 class Loading extends React.Component {
     render(){
+        const style = this.props.style;
         return (
-            <div>
-                <p>LOADING</p>
-            </div>
+            <Loader
+                style={style.base}
+                config={style.spinner}
+            />
         );
     }
 }
@@ -193,9 +205,9 @@ class Feed extends React.Component {
         return (
             <div style={style.base}>
                 <InfiniteScroll
-                    loadingEl={<Loading/>}
+                    loadingEl={<Loading style={style.loading}/>}
                     getNext={this.loadNext}
-                    canGetNext={true}
+                    canGetNext={this.props.feed.get('next')}
                     style={style.scroller}>
                     {data.map((i) => <Item key={i.id} style={style.item} {...i}/>)}
                 </InfiniteScroll>

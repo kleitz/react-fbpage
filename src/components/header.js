@@ -1,14 +1,14 @@
 'use strict';
 
-import React from 'react/addons';
+import React from 'react';
 import Radium from 'radium';
 import {Map} from 'immutable';
 
 @Radium
 class Header extends React.Component {
-    shouldComponentUpdate(){
-        return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
-    }
+    // shouldComponentUpdate(){
+    //     return React.addons.PureRenderMixin.shouldComponentUpdate.apply(this, arguments);
+    // }
     render(){
         const style = this.props.style;
         const header = this.props.header;
