@@ -9,9 +9,7 @@ import Profile from './profile';
 import Actions from './actions';
 import FeedContainer from './feed/container';
 
-import defaultTheme from '../themes/default';
-
-class FbPage extends React.Component {
+class Page extends React.Component {
     constructor(props){
         super(props);
     }
@@ -37,7 +35,7 @@ class FbPage extends React.Component {
     }
 }
 
-FbPage.propTypes = {
+Page.propTypes = {
     style: React.PropTypes.object,
     loading: React.PropTypes.bool,
     cover: React.PropTypes.instanceOf(Map).isRequired,
@@ -46,8 +44,4 @@ FbPage.propTypes = {
     feed: React.PropTypes.instanceOf(Map).isRequired
 };
 
-FbPage.defaultProps = {
-    style: defaultTheme
-};
-
-export default FbPage;
+export default Page;
