@@ -22,7 +22,7 @@ class FeedContainer extends React.Component {
                 <InfiniteScroll
                     loadingEl={<Loading style={style.loading}/>}
                     getNext={this.loadNext}
-                    canGetNext={this.props.feed.get('next')}
+                    canGetNext={true}
                     style={style.scroller}>
                     {data.map((i) =>
                         <Item {...i}

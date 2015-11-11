@@ -13,7 +13,7 @@ class App extends React.Component {
         return (
             <div>
                 <Provider store={store}>
-                    <FbPage/>
+                    <FbPage name={this.props.name}/>
                 </Provider>
             </div>
         );

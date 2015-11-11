@@ -7,52 +7,38 @@ import theme from '../../src/themes/default';
 
 theme.base.width = '50%';
 
+const DEFAULT_PAGE = 'facebook';
+
 class FbPageExample extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            name: DEFAULT_PAGE,
+            buffer: DEFAULT_PAGE
+        };
+        this.onChange = this.onChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+    onChange(evnt){
+        this.setState({ buffer: evnt.target.value });
+    }
+    onSubmit(evnt){
+        console.log('submit', this.state);
+        evnt.preventDefault();
+        this.setState({ name: this.state.buffer });
+    }
     render(){
         return (
-            <FbPageApp/>
+            <div>
+                <form onSubmit={this.onSubmit}>
+                    <input onChange={this.onChange} value={this.state.buffer}/>
+                    <button>Load</button>
+                </form>
+                <FbPageApp name={this.state.name}/>
+            </div>
         );
     }
 }
 
 const page = document.getElementById('page');
 ReactDOM.render(<FbPageExample style={theme}/>, page);
-
-
-// 'use strict';
-//
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import AltComponent from '../../src/flux/alt-component';
-// import {FbPage, fbStore, fbActions, theme} from '../../src/index';
-//
-// theme.base.width = '50%';
-//
-// class FbPageApp extends AltComponent {
-//     getStores(){
-//         return [fbStore];
-//     }
-//     getPropsFromStores(){
-//         return { store: fbStore.getState() };
-//     }
-//     componentDidMount(){
-//         super.componentDidMount();
-//         fbActions.load('facebook');
-//     }
-//     render(){
-//         const store = this.state.store;
-//         return (
-//             <FbPage
-//                 style={theme}
-//                 loading={store.get('loading')}
-//                 cover={store.get('cover')}
-//                 profile={store.get('profile')}
-//                 feed={store.get('feed')}
-//                 actions={store.get('actions')}
-//             />
-//         );
-//     }
-// }
-//
-// const page = document.getElementById('page');
-// ReactDOM.render(<FbPageApp/>, page);

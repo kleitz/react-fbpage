@@ -13,10 +13,15 @@ import defaultTheme from '../themes/default';
 }))
 class FbPage extends React.Component {
     componentDidMount(){
-        this.props.dispatch(loadPage({ name: 'facebook' }));
+        this.fetch(this.props.name);
+    }
+    componentWillReceiveProps(props){
+        if(props.name !== this.props.name){ this.fetch(props.name); }
+    }
+    fetch(name){
+        this.props.dispatch(loadPage({ name }));
     }
     render(){
-        console.log('props = ', this.props);
         return (
             <Page
                 style={this.props.style}
