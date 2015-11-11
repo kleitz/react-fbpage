@@ -38,6 +38,9 @@ class FbPage extends React.Component {
 FbPage.propTypes = {
     style: React.PropTypes.object,
     loading: React.PropTypes.bool,
+    name: React.PropTypes.string,
+    page: React.PropTypes.object,
+    feed: React.PropTypes.object,
     dispatch: React.PropTypes.func
 };
 

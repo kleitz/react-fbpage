@@ -13,11 +13,19 @@ class App extends React.Component {
         return (
             <div>
                 <Provider store={store}>
-                    <FbPage name={this.props.name}/>
+                    <FbPage
+                        style={this.props.style}
+                        name={this.props.name}
+                    />
                 </Provider>
             </div>
         );
     }
 }
+
+App.propTypes = {
+    style: React.PropTypes.object,
+    name: React.PropTypes.string
+};
 
 export default App;
