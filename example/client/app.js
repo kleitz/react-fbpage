@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import FbPageApp from '../../src/containers/app';
+import {FbPageApp} from '../../src/index';
 import theme from './theme';
 
 const DEFAULT_NAME = 'facebook';

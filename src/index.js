@@ -1,7 +1,5 @@
 'use strict';
 module.exports = {
-    FbPage: require('./components/page'),
-    fbStore: require('./flux/stores'),
-    fbActions: require('./flux/actions'),
+    FbPageApp: require('./containers/app'),
     theme: require('./themes/default')
 };
